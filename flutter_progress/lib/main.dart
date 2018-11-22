@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(       
+      theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
@@ -33,7 +33,9 @@ class _MyHomePageState extends State<MyHomePage> {
   String _imagePath;
 
   Future _pickFile() async {
-    final path = await FlutterDocumentPicker.openDocument();
+    final path = await FlutterDocumentPicker.openDocument(
+        //params: FlutterDocumentPickerParams(allowedUtiTypes: ["*"])
+        );
     print(path);
     setState(() {
       _imagePath = path;
@@ -42,7 +44,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -50,9 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         DevelopmentProgress(),
-        _imagePath != null
-            ? Image.file(File(_imagePath))
-            : Text("No image")
+        _imagePath != null ? Image.file(File(_imagePath)) : Text("No image")
       ])),
       floatingActionButton: FloatingActionButton(
         onPressed: _pickFile,
