@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress/progress/progress.dart';
 import 'package:flutter_document_picker/flutter_document_picker.dart';
+import 'package:file_picker/file_picker.dart';
 
 void main() => runApp(MyApp());
 
@@ -33,9 +34,11 @@ class _MyHomePageState extends State<MyHomePage> {
   String _imagePath;
 
   Future _pickFile() async {
-    final path = await FlutterDocumentPicker.openDocument(
-        //params: FlutterDocumentPickerParams(allowedUtiTypes: ["*"])
-        );
+    //final path = await FlutterDocumentPicker.openDocument(
+    //params: FlutterDocumentPickerParams(allowedUtiTypes: ["*"])
+    //    );
+
+    final path = await FilePicker.getFilePath(type: FileType.IMAGE);
     print(path);
     setState(() {
       _imagePath = path;
